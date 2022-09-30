@@ -105,7 +105,7 @@ break
 				case 'play': case 'yt': {
             
     conn.sendMessage(from, { react: { text: `🔍`, key: mek.key }})
-    if (!q) return reply('Example : ' + prefix + command + 'lelena')
+    if (!q) return reply('Example : ' + prefix + command + ' lelena')
 let yts = require("yt-search")
 let search = await yts(q)
 let anu = search.videos[0]
@@ -120,7 +120,7 @@ footer: 'sᴇʟᴇᴄᴛ ꜰᴏʀᴍᴀᴛ:',
 buttons: buttons,
 headerType: 4,
 }
-conn.sendMessage(m.chat, buttonMessage, { quoted: mek })
+conn.sendMessage(from, buttonMessage, { quoted: mek })
 }
 break
 
