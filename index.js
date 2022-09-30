@@ -14,6 +14,7 @@ const { state, saveState } = useSingleFileAuthState('./session.json')
 const config = require('./config')
 const prefix = '.'
 const owner = ['94766866297']
+const yts = require( 'yt-search' )
 const connectToWA = () => {
 	const conn = makeWASocket({
 		logger: P({ level: 'silent' }),
@@ -107,15 +108,12 @@ break
     
  conn.sendMessage(from, { react: { text: '🔍', key: mek.key }})
     if (!q) return reply('Example : ' + prefix + command + ' Chanux bro')
- let yts = require("yt-search")
- let search = await yts(q)
- let msg = '┌───[🐉EDM BOT🐉]\n\n  *🔍YOUTUBE SEARCH*\n\n'
- let no = 1
- for (let i of search.all) {
- msg += '*Result No :* ' + no++ + '\n\n*Title :* ' + i.title + '\n\n*Views :* ' + i.views + '\n\n*Duration :* ' + i.timestamp + '\n\n*Uploaded :* ' + i.ago + '\n\n*Author :* ' + i.author.name + '\n\n*Url :* ' + i.url + '\n\n\n*-----------------------------------------------------------------------------\n\n\n*'
- }
- conn.sendMessage(from, { text: msg }, { quoted: mek })
- }
+ var arama = await yts(q)
+ var msg = '';
+arama.all.map((video) => {
+msg += ' *🖲️' + video.title + '*\n🔗 ' + video.url + '\n\n'
+});
+const results = await conn.sendMessage(from , { text:  msg }, { quoted: mek } )
  
  break	
 					
