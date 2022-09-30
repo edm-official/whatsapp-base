@@ -68,9 +68,14 @@ const connectToWA = () => {
 			
 			switch (command) {
 
-case 'hola':
-reply('Hola ' + pushname + '.\n\nGracias por utilizar la base de Inky\n\nPuedes apoyarlo siguiendolo en ig\n\n*Ig:* https://instagram.com/god_inky')
-break
+case 'alive' : {  
+			const buttons = [
+{buttonId: prefix +'Menu ' + q, buttonText: {displayText: 'MENU'}, type: 1},
+{buttonId: prefix +'Owner ' + q, buttonText: {displayText: 'OWNER'}, type: 1},
+]
+			await conn.sendMessage(from, { image: {url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/WhatsApp_logo-color-vertical.svg/640px-WhatsApp_logo-color-vertical.svg.png'  }, caption: 'I Am Alive Now' , footer: 'EDM BOT BASE' , buttons: buttons , headerType: 4} , { quoted: mek } )	
+			   
+		   } break
 
 				default:
 					
