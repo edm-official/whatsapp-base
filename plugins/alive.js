@@ -6,7 +6,7 @@ async function alive(conn , mek) {
   { urlButton: {displayText: 'Youtube' , url: '' }},
   { urlButton: {displayText: 'Github' , url: '' }},
   { quickReplyButton: {displayText: 'MENU', id: prefix +'menu' }} , 
-  { quickReplyButton: {displayText: 'OWNER', id: prefix +'owner' }}   
+  { quickReplyButton: {displayText: prefix +'owner', id: prefix +'owner' }}   
  ]
    const buttonMessage = {
     caption: config.ALIVE_MSG ,
@@ -15,6 +15,7 @@ async function alive(conn , mek) {
     image: {url: config.ALIVE_LOGO}
 }                                                 
 await conn.sendMessage(from, buttonMessage )
+  
   }
 
 
