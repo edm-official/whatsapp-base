@@ -124,6 +124,64 @@ conn.sendMessage(from, buttonMessage, { quoted: mek })
 }
 break
 
+case 'ytdoc': {
+	await conn.sendMessage(from, { react: { text: '⬇️', key: mek.key }})
+	if ( !q.includes('youtu') ) return await conn.sendMessage(from , { text: '*Need yt link*' }, { quoted: mek } )  
+			  let { yta } = require('./lib/y2mate')
+					  let quality = args[1] ? args[1] : '256kbps'
+					  let media = await yta(text, quality)
+					  if (media.filesize >= 100000) {
+					  const msg = '*SONG SIZE UP TO 100MB ⛔*'
+                      const templateButtons = [
+						{ urlButton: {displayText: 'ᴅᴏᴡɴʟᴏᴀᴅ ʟɪɴᴋ 🎯' , url: media.dl_link+'.mp4' }},
+					  ]
+
+					  const templateMessage = {
+					  text: msg,
+					  footer: config.FOOTER,
+					  templateButtons: templateButtons
+					  }
+
+					  await conn.sendMessage(from, templateMessage, { quoted: mek })   
+					}
+	const docdown = await conn.sendMessage(from , { text: pushname + ' ' + config.SONG_DOWN }, { quoted: mek } )
+	await conn.sendMessage(from, { delete: docdown.key })
+	const docup = await conn.sendMessage(from , { text: pushname + ' ' + config.SONG_UP }, { quoted: mek } )
+    const doc= await conn.sendMessage(from, { document: { url: media.dl_link }, mimetype: 'audio/mpeg', fileName: `${media.title}.mp3` }, { quoted: mek })
+	await  conn.sendMessage(from, { delete: docup.key })
+	
+				  }
+				  break
+
+				  case 'ytmp3': {
+					await conn.sendMessage(from, { react: { text: '⬇️', key: mek.key }})
+					if ( !q.includes('youtu') ) return await conn.sendMessage(from , { text: '*Need yt link*' }, { quoted: mek } )  
+							  let { yta } = require('./lib/y2mate')
+									  let quality = args[1] ? args[1] : '256kbps'
+									  let media = await yta(text, quality)
+									  if (media.filesize >= 100000) {
+									  const msg = '*SONG SIZE UP TO 100MB ⛔*'
+									  const templateButtons = [
+										{ urlButton: {displayText: 'ᴅᴏᴡɴʟᴏᴀᴅ ʟɪɴᴋ 🎯' , url: media.dl_link+'.mp4' }},
+									  ]
+				
+									  const templateMessage = {
+									  text: msg,
+									  footer: config.FOOTER,
+									  templateButtons: templateButtons
+									  }
+				
+									  await conn.sendMessage(from, templateMessage, { quoted: mek })   
+									}
+					const auddown = await conn.sendMessage(from , { text: pushname + ' ' + config.SONG_DOWN }, { quoted: mek } )
+					await conn.sendMessage(from, { delete: auddown.key })
+					const audup = await conn.sendMessage(from , { text: pushname + ' ' + config.SONG_UP }, { quoted: mek } )
+					const au = await conn.sendMessage(from, { audio: { url: media.dl_link }, mimetype: 'audio/mpeg', fileName: `${media.title}.mp3` }, { quoted: mek })
+					await  conn.sendMessage(from, { delete: audup.key })
+					
+								  }
+								  break
+
 				
 				default:
 					
