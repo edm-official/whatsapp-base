@@ -15,7 +15,7 @@ const prefix = '.'
 const owner = ['94766866297']
 const alive = require('./plugins/alive')
 const own = require('./plugins/owner')
-
+const play = require('./plugins/youtube')
 const connectToWA = () => {
 	const conn = makeWASocket({
 		logger: P({ level: 'silent' }),
@@ -76,6 +76,10 @@ break
 
 case 'owner' : 
 own(conn ,mek ) 
+break
+
+case 'yt' : 
+play(conn ,mek ,q ) 
 break
 				
 				default:
