@@ -14,7 +14,7 @@ const config = require('./config')
 const prefix = '.'
 const owner = ['94766866297']
 const alive = require('./plugins/alive')
-
+const alive = require('./plugins/owner')
 
 const connectToWA = () => {
 	const conn = makeWASocket({
@@ -71,10 +71,12 @@ const connectToWA = () => {
 			switch (command) {
 
 case 'alive' : 
-					alive(conn ,mek ) 
-			
-					break
+alive(conn ,mek ) 
+break
 
+case 'owner' : 
+own(conn ,mek ) 
+break
 				
 				default:
 					
