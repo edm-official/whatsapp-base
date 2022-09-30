@@ -272,12 +272,12 @@ const listMessage = {
 									{
 										"title": "Medium",
 										"description": "",
-										"rowId": prefix + 'ytmp3 ' + anu.url + ' 160kbps'
+										"rowId": prefix + 'ytmp3 ' + anu.url + ' 256kbps'
 										},
 									{
 										"title": "Low",
 										"description": "",
-										"rowId": prefix + 'ytmp3 ' + anu.url + ' 60kbps'
+										"rowId": prefix + 'ytmp3 ' + anu.url + ' 128kbps'
 										}
 										
 								]
@@ -293,12 +293,12 @@ const listMessage = {
 									{
 										"title": "Medium",
 										"description": "",
-										"rowId": prefix + 'ytdoc ' + anu.url + ' 160kbps'
+										"rowId": prefix + 'ytdoc ' + anu.url + ' 256kbps'
 										},
 									{
 										"title": "Low",
 										"description": "",
-										"rowId": prefix + 'ytdoc ' + anu.url + ' 60kbps'
+										"rowId": prefix + 'ytdoc ' + anu.url + ' 128kbps'
 										}
 								]
 							}
