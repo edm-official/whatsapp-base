@@ -5,9 +5,9 @@ const prefix = '.'
 async function alive(conn , mek) {
   const from = mek.key.remoteJid	  
   const templateButtons = [
+{buttonId: prefix +'menu ', buttonText: {displayText: 'MENU'}, type: 1},
+{buttonId: prefix +'owner ', buttonText: {displayText: 'OWNER'}, type: 1},
 
-  {index: 1, quickReplyButton: {displayText: 'MENU', id: prefix +'menu' }} , 
-  {index: 2, quickReplyButton: {displayText: 'OWNER', id: prefix +'owner' }}   
  ]
    const buttonMessage = {
     caption: config.ALIVE_MSG ,
