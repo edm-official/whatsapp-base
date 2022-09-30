@@ -66,8 +66,10 @@ const connectToWA = () => {
 			}
 			
 			switch (command) {
+					
+//........................................................Alive................................................................\\
 
-case 'alive' : {
+				case 'alive' : {
 	
   const templateButtons = [
   { urlButton: {displayText: 'Youtube' , url: '' }},
@@ -85,6 +87,8 @@ await conn.sendMessage(from, buttonMessage )
   
   }
 break
+					
+//........................................................Owner................................................................\\
 
 case 'owner' : {
 const vcard = 'BEGIN:VCARD\n' 
@@ -95,7 +99,30 @@ const vcard = 'BEGIN:VCARD\n'
  await conn.sendMessage(from,{ contacts: { displayName: config.OWNER_NAME , contacts: [{ vcard }]  }} , { quoted: mek })
   }
 break
+					
+//........................................................Youtube................................................................\\
 
+				case 'play': case 'yt': {
+            
+    conn.sendMessage(from, { react: { text: `🔍`, key: mek.key }})
+    if (!q) return reply('Example : ${prefix + command} lelena')
+let yts = require("yt-search")
+let search = await yts(q)
+let anu = search.videos[0]
+let buttons = [
+{buttonId: 'ytmp4 ${anu.url} 360p', buttonText: {displayText: 'VIDEO'}, type: 1},
+{buttonId: 'ytdoc ${anu.url} 128kbps', buttonText: {displayText: 'AUDIO'}, type: 1}
+]
+let buttonMessage = {
+image: { url: anu.thumbnail },
+caption: '┌───[EDM BOT]\n\n  *📥SONG DOWNLODER*\n\n│🎧sᴏɴɢ: ' + anu.title + '\n\n│ 👀ᴠɪᴇᴡs: ' + anu.views + '\n\n│ 📹 ᴄʜᴀɴɴᴇʟ: ' + anu.author + '\n\n│🖇️ᴜʀʟ: ' + anu.url + '\n\n└───────────◉',
+footer: 'sᴇʟᴇᴄᴛ ꜰᴏʀᴍᴀᴛ:',
+buttons: buttons,
+headerType: 4,
+}
+conn.sendMessage(m.chat, buttonMessage, { quoted: mek })
+}
+break
 
 				
 				default:
