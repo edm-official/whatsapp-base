@@ -105,13 +105,13 @@ break
 				case 'play': case 'yt': {
             
     conn.sendMessage(from, { react: { text: `🔍`, key: mek.key }})
-    if (!q) return reply('Example : ${prefix + command} lelena')
+    if (!q) return reply('Example : ' + prefix + command + 'lelena')
 let yts = require("yt-search")
 let search = await yts(q)
 let anu = search.videos[0]
 let buttons = [
-{buttonId: 'ytmp4 ${anu.url} 360p', buttonText: {displayText: 'VIDEO'}, type: 1},
-{buttonId: 'ytdoc ${anu.url} 128kbps', buttonText: {displayText: 'AUDIO'}, type: 1}
+{buttonId: prefix + 'ytmp4 ' +  anu.url + ' 360p', buttonText: {displayText: 'VIDEO'}, type: 1},
+{buttonId: prefix + 'ytmp3 ' + anu.url + ' 128kbps', buttonText: {displayText: 'AUDIO'}, type: 1}
 ]
 let buttonMessage = {
 image: { url: anu.thumbnail },
