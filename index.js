@@ -71,12 +71,11 @@ const connectToWA = () => {
 					
 //........................................................Alive................................................................\\
 
-				case 'alive' : 
-				try {
+				case 'alive' :  {
 						
 						  const templateButtons = [
-						  { urlButton: {displayText: config.URL_1NAME , url: config.URL_1LINK }},
-						  { urlButton: {displayText: config.URL_2NAME , url: config.URL_2LINK }},
+						  { urlButton: {displayText: 'Youtube' , url: '' }},
+						  { urlButton: {displayText: 'Github' , url: '' }},
 						  { quickReplyButton: {displayText: 'MENU', id: prefix +'menu' }} , 
 						  { quickReplyButton: {displayText: 'OWNER', id: prefix +'owner' }}   
 												  ]
@@ -87,6 +86,7 @@ const connectToWA = () => {
 						   image: {url: config.ALIVE_LOGO}
 												  }                             
 							 await conn.sendMessage(from, buttonMessage )
+				}
 break
 					
 //........................................................Owner................................................................\\
