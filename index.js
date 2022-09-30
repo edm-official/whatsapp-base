@@ -114,7 +114,7 @@ arama.all.map((video) => {
 msg += ' *🖲️' + video.title + '*\n🔗 ' + video.url + '\n\n'
 });
 const results = await conn.sendMessage(from , { text:  msg }, { quoted: mek } )
- 
+}
  break	
 					
 				case 'play': case 'yt': {
