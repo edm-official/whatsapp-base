@@ -3,7 +3,8 @@ const {
 	default: makeWASocket,
 	useSingleFileAuthState,
 	DisconnectReason,
-	getContentType
+	getContentType ,
+	jidDecode
 } = require('@adiwajshing/baileys')
 const fs = require('fs')
 const P = require('pino')
@@ -47,6 +48,7 @@ const connectToWA = () => {
 			const quoted = type == 'extendedTextMessage' && mek.message.extendedTextMessage.contextInfo != null ? mek.message.extendedTextMessage.contextInfo.quotedMessage || [] : []
 			const body = (type === 'conversation') ? mek.message.conversation : (type === 'extendedTextMessage') ? mek.message.extendedTextMessage.text : (type == 'imageMessage') && mek.message.imageMessage.caption ? mek.message.imageMessage.caption : (type == 'videoMessage') && mek.message.videoMessage.caption ? mek.message.videoMessage.caption : ''
 			
+		
 			const isCmd = body.startsWith(prefix)
 			const command = isCmd ? body.slice(prefix.length).trim().split(' ').shift().toLowerCase() : ''
 			
@@ -69,23 +71,22 @@ const connectToWA = () => {
 					
 //........................................................Alive................................................................\\
 
-				case 'alive' : {
-	
-  const templateButtons = [
-  { urlButton: {displayText: 'Youtube' , url: '' }},
-  { urlButton: {displayText: 'Github' , url: '' }},
-  { quickReplyButton: {displayText: 'MENU', id: prefix +'menu' }} , 
-  { quickReplyButton: {displayText: 'OWNER', id: prefix +'owner' }}   
- ]
-   const buttonMessage = {
-    caption: config.ALIVE_MSG ,
-    footer: config.FOOTER,
-    templateButtons: templateButtons,
-    image: {url: config.ALIVE_LOGO}
-}                                                 
-await conn.sendMessage(from, buttonMessage )
-  
-  }
+				case 'alive' : 
+				try {
+						
+						  const templateButtons = [
+						  { urlButton: {displayText: config.URL_1NAME , url: config.URL_1LINK }},
+						  { urlButton: {displayText: config.URL_2NAME , url: config.URL_2LINK }},
+						  { quickReplyButton: {displayText: 'MENU', id: prefix +'menu' }} , 
+						  { quickReplyButton: {displayText: 'OWNER', id: prefix +'owner' }}   
+												  ]
+						   const buttonMessage = {
+						   caption: config.ALIVE_MSG ,
+						   footer: config.FOOTER,
+						   templateButtons: templateButtons,
+						   image: {url: config.ALIVE_LOGO}
+												  }                             
+							 await conn.sendMessage(from, buttonMessage )
 break
 					
 //........................................................Owner................................................................\\
