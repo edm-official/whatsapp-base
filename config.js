@@ -1,9 +1,15 @@
-const { Sequelize } = require('sequelize');
-const fs = require('fs');
-if (fs.existsSync('config.env')) require('dotenv').config({ path: './config.env' });
+const fs = require('fs')
+const chalk = require('chalk')
 
-module.exports = {
-    ALIVEMSG: process.env.ALIVE_MESSAGE === undefined ? 'Alive' : process.env.ALIVE_MESSAGE,
-    ALIVE_LOGO: process.env.ALIVE_LOGO === undefined ? 'https://i.ibb.co/SXgrRRx/dd40818b8613.jpg' : process.env.ALIVE_LOGO,
-   
-};
+
+//settings
+global.ALIVE_LOGO = process.env.ALIVE_LOGO || 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/WhatsApp_logo-color-vertical.svg/220px-WhatsApp_logo-color-vertical.svg.png'
+global.ALIVE_MSG = process.env.ALIVE_MSG || 'Alive Now'
+
+let file = require.resolve(__filename)
+fs.watchFile(file, () => {
+	fs.unwatchFile(file)
+	console.log(chalk.redBright(`Update'${__filename}'`))
+	delete require.cache[file]
+	require(file)
+})
