@@ -1,4 +1,4 @@
-const config = require('./config')
+require("./config")
 const {
 	default: makeWASocket,
 	useSingleFileAuthState,
@@ -75,7 +75,7 @@ case 'alive' : {
 {buttonId: prefix +'Menu ' + q, buttonText: {displayText: 'MENU'}, type: 1},
 {buttonId: prefix +'Owner ' + q, buttonText: {displayText: 'OWNER'}, type: 1},
 ]
-			await conn.sendMessage(from, { image: {url: config.ALIVE_LOGO  }, caption: config.ALIVE_MSG , footer: 'EDM BOT BASE' , buttons: buttons , headerType: 4} , { quoted: mek } )	
+			await conn.sendMessage(from, { image: {url: global.ALIVE_LOGO  }, caption: global.ALIVE_MSG , footer: 'EDM BOT BASE' , buttons: buttons , headerType: 4} , { quoted: mek } )	
 			   
 		   }
 					break
