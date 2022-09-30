@@ -111,7 +111,7 @@ let search = await yts(q)
 let anu = search.videos[0]
 let buttons = [
 {buttonId: prefix + 'ytmp4 ' +  anu.url + ' 360p', buttonText: {displayText: 'VIDEO'}, type: 1},
-{buttonId: prefix + 'ytmp3 ' + anu.url + ' 128kbps', buttonText: {displayText: 'AUDIO'}, type: 1}
+{buttonId: '.ytmp3 ' + anu.url + ' 128kbps', buttonText: {displayText: 'AUDIO'}, type: 1}
 ]
 let buttonMessage = {
 image: { url: anu.thumbnail },
@@ -129,7 +129,7 @@ case 'ytdoc': {
 	if ( !q.includes('youtu') ) return await conn.sendMessage(from , { text: '*Need yt link*' }, { quoted: mek } )  
 			  let { yta } = require('./lib/y2mate')
 					  let quality = args[1] ? args[1] : '256kbps'
-					  let media = await yta(text, quality)
+					  let media = await yta(q, quality)
 					  if (media.filesize >= 100000) {
 					  const msg = '*SONG SIZE UP TO 100MB ⛔*'
                       const templateButtons = [
@@ -158,7 +158,7 @@ case 'ytdoc': {
 					if ( !q.includes('youtu') ) return await conn.sendMessage(from , { text: '*Need yt link*' }, { quoted: mek } )  
 							  let { yta } = require('./lib/y2mate')
 									  let quality = args[1] ? args[1] : '256kbps'
-									  let media = await yta(text, quality)
+									  let media = await yta(q, quality)
 									  if (media.filesize >= 100000) {
 									  const msg = '*SONG SIZE UP TO 100MB ⛔*'
 									  const templateButtons = [
