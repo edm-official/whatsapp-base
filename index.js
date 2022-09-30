@@ -105,7 +105,7 @@ break
 
 				case 'play': case 'yt': {
             
-    conn.sendMessage(from, { react: { text: `🔍`, key: mek.key }})
+    conn.sendMessage(from, { react: { text: '🔍', key: mek.key }})
     if (!q) return reply('Example : ' + prefix + command + ' lelena')
 let yts = require("yt-search")
 let search = await yts(q)
@@ -116,7 +116,28 @@ let buttons = [
 ]
 let buttonMessage = {
 image: { url: anu.thumbnail },
-caption: '┌───[EDM BOT]\n\n  *📥SONG DOWNLODER*\n\n│🎧sᴏɴɢ: ' + anu.title + '\n\n│ 👀ᴠɪᴇᴡs: ' + anu.views + '\n\n│ 📹 ᴄʜᴀɴɴᴇʟ: ' + anu.author + '\n\n│🖇️ᴜʀʟ: ' + anu.url + '\n\n└───────────◉',
+caption: '┌───[🐉EDM BOT🐉]\n\n  *📥YOUTUBE DOWNLODER*\n\n│🎧sᴏɴɢ: ' + anu.title + '\n\n│ 👀ᴠɪᴇᴡs: ' + anu.views + '\n\n│ 📹 ᴄʜᴀɴɴᴇʟ: ' + anu.author + '\n\n│🖇️ᴜʀʟ: ' + anu.url + '\n\n└───────────◉',
+footer: 'sᴇʟᴇᴄᴛ ꜰᴏʀᴍᴀᴛ:',
+buttons: buttons,
+headerType: 4,
+}
+conn.sendMessage(from, buttonMessage, { quoted: mek })
+}
+break
+					case 'song':  {
+            
+    conn.sendMessage(from, { react: { text: '🎧', key: mek.key }})
+    if (!q) return reply('Example : ' + prefix + command + ' lelena')
+let yts = require("yt-search")
+let search = await yts(q)
+let anu = search.videos[0]
+let buttons = [
+{buttonId: prefix + 'ytdoc ' +  anu.url , buttonText: {displayText: 'DOCUMENT'}, type: 1},
+{buttonId: prefix + 'ytmp3 ' + anu.url , buttonText: {displayText: 'AUDIO'}, type: 1}
+]
+let buttonMessage = {
+image: { url: anu.thumbnail },
+caption: '┌───[🐉EDM BOT🐉]\n\n  *📥SONG DOWNLODER*\n\n│🎧sᴏɴɢ: ' + anu.title + '\n\n│ 👀ᴠɪᴇᴡs: ' + anu.views + '\n\n│ 📹 ᴄʜᴀɴɴᴇʟ: ' + anu.author + '\n\n│🖇️ᴜʀʟ: ' + anu.url + '\n\n└───────────◉',
 footer: 'sᴇʟᴇᴄᴛ ꜰᴏʀᴍᴀᴛ:',
 buttons: buttons,
 headerType: 4,
@@ -148,7 +169,7 @@ case 'ytdoc': {
 	const docdown = await conn.sendMessage(from , { text: pushname + ' ' + config.SONG_DOWN }, { quoted: mek } )
 	await conn.sendMessage(from, { delete: docdown.key })
 	const docup = await conn.sendMessage(from , { text: pushname + ' ' + config.SONG_UP }, { quoted: mek } )
-    const doc= await conn.sendMessage(from, { document: { url: media.dl_link }, mimetype: 'audio/mpeg', fileName: `${media.title}.mp3` }, { quoted: mek })
+    const doc= await conn.sendMessage(from, { document: { url: media.dl_link }, mimetype: 'audio/mpeg', fileName: media.title + '.mp3' }, { quoted: mek })
 	await  conn.sendMessage(from, { delete: docup.key })
 	
 				  }
@@ -177,8 +198,37 @@ case 'ytdoc': {
 					const auddown = await conn.sendMessage(from , { text: pushname + ' ' + config.SONG_DOWN }, { quoted: mek } )
 					await conn.sendMessage(from, { delete: auddown.key })
 					const audup = await conn.sendMessage(from , { text: pushname + ' ' + config.SONG_UP }, { quoted: mek } )
-					const au = await conn.sendMessage(from, { audio: { url: media.dl_link }, mimetype: 'audio/mpeg', fileName: `${media.title}.mp3` }, { quoted: mek })
+					const au = await conn.sendMessage(from, { audio: { url: media.dl_link }, mimetype: 'audio/mpeg', fileName: media.title + '.mp3' }, { quoted: mek })
 					await  conn.sendMessage(from, { delete: audup.key })
+					
+								  }
+								  break
+					
+					case 'ytmp4': {
+					await conn.sendMessage(from, { react: { text: '⬇️', key: mek.key }})
+					if ( !q.includes('youtu') ) return await conn.sendMessage(from , { text: '*Need yt link*' }, { quoted: mek } )  
+							   let { ytv } = require('./lib/y2mate')
+									  let quality = args[1] ? args[1] : '360p'
+									  let media = await ytv(q, quality)
+									  if (media.filesize >= 100000) {
+									  const msg = '*VIDEO SIZE UP TO 100MB ⛔*'
+									  const templateButtons = [
+										{ urlButton: {displayText: 'ᴅᴏᴡɴʟᴏᴀᴅ ʟɪɴᴋ 🎯' , url: media.dl_link + '.mp4' }},
+									  ]
+				
+									  const templateMessage = {
+									  text: msg,
+									  footer: config.FOOTER,
+									  templateButtons: templateButtons
+									  }
+				
+									  await conn.sendMessage(from, templateMessage, { quoted: mek })   
+									}
+					const viddown = await conn.sendMessage(from , { text: pushname + ' ' + config.VIDEO_DOWN }, { quoted: mek } )
+					await conn.sendMessage(from, { delete: viddown.key })
+					const vidup = await conn.sendMessage(from , { text: pushname + ' ' + config.VIDEO_UP }, { quoted: mek } )
+					const vid = await conn.sendMessage(from, { video: { url: media.dl_link }, mimetype: 'video/mp4', fileName: media.title + '.mp4', caption: config.CAPTION }, { quoted: mek })
+					await  conn.sendMessage(from, { delete: vidup.key })
 					
 								  }
 								  break
