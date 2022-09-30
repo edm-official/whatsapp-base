@@ -1,4 +1,4 @@
-
+require("./config")
 const {
 	default: makeWASocket,
 	useSingleFileAuthState,
@@ -14,7 +14,7 @@ const { state, saveState } = useSingleFileAuthState('./session.json')
 
 const prefix = '.'
 const owner = ['94766866297']
-const config = require('./config.js')
+
 
 const connectToWA = () => {
 	const conn = makeWASocket({
