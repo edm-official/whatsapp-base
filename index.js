@@ -1,4 +1,4 @@
-require("./config")
+const config = require('./config')
 const {
 	default: makeWASocket,
 	useSingleFileAuthState,
