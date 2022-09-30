@@ -2,7 +2,7 @@
   "name": "edm bot base",
   "description": "whatsapp md bot build with nodejs",
   "repository": "https://github.com/edm-official/whatsapp-base",
-  "logo": "https://telegra.ph/file/4c2c0174e86ac3bac2ba8.jpg",
+  "logo": "",
   "keywords": ["nodejs", "bot", "whatsapp bot", "whatsapp automation", "multi device"],
   "buildpacks": [
     {
