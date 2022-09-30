@@ -3,8 +3,8 @@ const chalk = require('chalk')
 
 
 //settings
-config.ALIVE_MSG = process.env.ALIVE_MSG || 'Alive Now'
-config.ALIVE_LOGO = process.env.ALIVE_LOGO || 'https://img.phonandroid.com/2019/05/whatsapp-publicit%C3%A9s-2020.jpg'
+global.ALIVE_MSG = process.env.ALIVE_MSG || 'Alive Now'
+global.ALIVE_LOGO = process.env.ALIVE_LOGO || 'https://img.phonandroid.com/2019/05/whatsapp-publicit%C3%A9s-2020.jpg'
 
 let file = require.resolve(__filename)
 fs.watchFile(file, () => {
