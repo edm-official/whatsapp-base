@@ -1,19 +1,19 @@
 const config = require('../config');
 const prefix = '.'
-
-
 async function alive(conn , mek) {
   const from = mek.key.remoteJid	
-  const buttons = [
-{buttonId: '${prefix}menu ' , buttonText: {displayText: 'MENU'}, type: 1},
-{buttonId: '${prefix}owner ' , buttonText: {displayText: 'OWNER'}, type: 1}
+  const templateButtons = [
+  { urlButton: {displayText: 'Youtube' , url: '' }},
+  { urlButton: {displayText: 'Github' , url: '' }},
+  { quickReplyButton: {displayText: 'MENU', id: prefix +'menu' }} , 
+  { quickReplyButton: {displayText: 'OWNER', id: prefix +'owner' }}   
  ]
    const buttonMessage = {
     caption: config.ALIVE_MSG ,
-    footer: config.FOOTER ,
-    buttons: buttons,
+    footer: config.FOOTER,
+    templateButtons: templateButtons,
     image: {url: config.ALIVE_LOGO}
-}                             
+}                                                 
 await conn.sendMessage(from, buttonMessage )
   }
 
