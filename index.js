@@ -103,6 +103,22 @@ break
 					
 //........................................................Youtube................................................................\\
 
+				case 'yts': case 'ytsearch': {
+    
+ conn.sendMessage(from, { react: { text: '🔍', key: mek.key }})
+    if (!q) return reply('Example : ' + prefix + command + ' Chanux bro')
+ let yts = require("yt-search")
+ let search = await yts(q)
+ let msg = '┌───[🐉EDM BOT🐉]\n\n  *🔍YOUTUBE SEARCH*\n\n'
+ let no = 1
+ for (let i of search.all) {
+ teks += '*Result No :*' + no++ + '\n\n*Title :*' + i.title + '\n\n*Views :*' + i.views + '\n\n*Duration :*' + i.timestamp + '\n\n*Uploaded :*' + i.ago + '\n\n*Author :*' + i.author.name + '\n\n*Url :*' + i.url + '\n\n\n-----------------------------------------------------------------------------\n\n\n'
+ }
+ conn.sendMessage(from, { text: msg }, { quoted: mek })
+ }
+ 
+ break	
+					
 				case 'play': case 'yt': {
             
     conn.sendMessage(from, { react: { text: '🔍', key: mek.key }})
@@ -257,6 +273,7 @@ case 'ytdoc': {
 					
 								  }
 								  break
+					
 
 				
 				default:
