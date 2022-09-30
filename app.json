@@ -4,22 +4,37 @@
   "repository": "https://github.com/edm-official/whatsapp-base",
   "logo": "",
   "keywords": ["nodejs", "bot", "whatsapp bot", "whatsapp automation", "multi device"],
- 
-  "buildpacks": [
-    {
-      "url": "heroku/nodejs"
+  "env": {
+  
+"ALIVE_MSG" :{
+    "description" : "alive message",
+    "required" : true,
+  "value" : "Alive now"
     },
-    {
-      "url": "https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest"
+  
+        "ALIVE_LOGO" :{
+    "description" : "alive logo",
+    "required" : true,
+  "value" : "https://img.phonandroid.com/2019/05/whatsapp-publicit%C3%A9s-2020.jpg"
+    }
+        
     },
-    {
-      "url": "https://github.com/clhuang/heroku-buildpack-webp-binaries.git"
-    }
-  ],
-   "formation": {
-        "worker": {
-            "quantity": 1,
-            "size": "free"
-        }
-    }
-}
+  
+    "buildpacks": [
+      {
+        "url": "heroku/nodejs"
+      },
+      {
+        "url": "https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest"
+      },
+      {
+        "url": "https://github.com/clhuang/heroku-buildpack-webp-binaries.git"
+      }
+    ],
+     "formation": {
+          "worker": {
+              "quantity": 1,
+              "size": "free"
+          }
+      }
+  }
