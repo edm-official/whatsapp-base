@@ -1,4 +1,4 @@
-require("./config")
+
 const {
 	default: makeWASocket,
 	useSingleFileAuthState,
@@ -9,11 +9,11 @@ const fs = require('fs')
 const P = require('pino')
 const qrcode = require('qrcode-terminal')
 const util = require('util')
-
 const { state, saveState } = useSingleFileAuthState('./session.json')
-
+const config = require('./config')
 const prefix = '.'
 const owner = ['94766866297']
+const alive = require('./plugins/alive')
 
 
 const connectToWA = () => {
@@ -70,14 +70,9 @@ const connectToWA = () => {
 			
 			switch (command) {
 
-case 'alive' : {  
-			const buttons = [
-{buttonId: prefix +'Menu ' + q, buttonText: {displayText: 'MENU'}, type: 1},
-{buttonId: prefix +'Owner ' + q, buttonText: {displayText: 'OWNER'}, type: 1},
-]
-			await conn.sendMessage(from, { image: {url: global.ALIVE_LOGO  }, caption: global.ALIVE_MSG , footer: 'EDM BOT BASE' , buttons: buttons , headerType: 4} , { quoted: mek } )	
-			   
-		   }
+case 'alive' : 
+					alive(conn ,mek ) 
+			
 					break
 
 				
