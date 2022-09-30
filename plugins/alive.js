@@ -17,6 +17,6 @@ async function alive(conn , mek) {
 }                             
 await conn.sendMessage(from, buttonMessage )
   }
-}
+
 
 module.exports =  alive ;
