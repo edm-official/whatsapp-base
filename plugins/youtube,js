@@ -1,6 +1,6 @@
 const config = require('../config');
 const prefix = '.'
-async function alive(conn , mek) {
+async function alive(conn , mek , q) {
   const from = mek.key.remoteJid
   if (!q) return reply('Example : ${prefix + command} lelena)
 let yts = require("yt-search")
