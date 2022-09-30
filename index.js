@@ -215,6 +215,7 @@ case 'ytdoc': {
 				  break
 					
 					case 'ytdl': {
+	conn.sendMessage(from, { react: { text: '🔍', key: mek.key }})
 	if (!q) return reply('Example : ' + prefix + command + ' lelena')
 	let yts = require("yt-search")
         let search = await yts(q)
