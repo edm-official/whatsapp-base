@@ -14,7 +14,7 @@ const config = require('./config')
 const prefix = '.'
 const owner = ['94766866297']
 const alive = require('./plugins/alive')
-const alive = require('./plugins/owner')
+const own = require('./plugins/owner')
 
 const connectToWA = () => {
 	const conn = makeWASocket({
