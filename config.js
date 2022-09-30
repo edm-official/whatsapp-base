@@ -1,12 +1,14 @@
+const fs = require('fs')
+const chalk = require('chalk')
 
-const fs = require('fs');
-if (fs.existsSync('config.env')) require('dotenv').config({ path: './config.env' });
 
+global.ALIVE_LOGO = process.env.ALIVE_LOGO || 'https://i.ibb.co/SXgrRRx/dd40818b8613.jpg'
+global.ALIVE_MSG = process.env.ALIVE_MSG || 'I am alive'
 
-module.exports = {
-   
-    ALIVEMSG: process.env.ALIVE_MESSAGE === undefined ? 'default' : process.env.ALIVE_MESSAGE,
-    ALIVE_LOGO: process.env.ALIVE_LOGO === undefined ? 'https://i.ibb.co/SXgrRRx/dd40818b8613.jpg' : process.env.ALIVE_LOGO,
-    
-};
-
+let file = require.resolve(__filename)
+fs.watchFile(file, () => {
+	fs.unwatchFile(file)
+	console.log(chalk.redBright(`Update'${__filename}'`))
+	delete require.cache[file]
+	require(file)
+})
