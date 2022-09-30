@@ -213,6 +213,101 @@ case 'ytdoc': {
 	
 				  }
 				  break
+					
+					case 'ytdl': {
+	if (!q) return reply('Example : ' + prefix + command + ' lelena')
+	let yts = require("yt-search")
+        let search = await yts(q)
+        let anu = search.videos[0]
+                	   
+const listMessage = {
+      text: '┌───[🐉EDM BOT🐉]\n\n  *📥ADVANCE DOWNLODER*\n\n│🏻‍♀️ᴛɪᴛʟᴇ: ' + anu.title + '\n\n│ 👀ᴠɪᴇᴡs: ' + anu.views + '\n\n│ 📹 ᴄʜᴀɴɴᴇʟ: ' + anu.author + '\n\n│🖇️ᴜʀʟ: ' + anu.url + '\n\n└───────────◉',
+      footer: config.FOOTER,
+      title: 'Hello ' pushname ,
+      buttonText: "Results",
+      sections: [{
+								"title": "Advance Video Quality",
+								"rows": [
+									{
+										"title": "1080p",
+										"description": "",
+										"rowId": prefix + 'ytmp4 ' + anu.url + ' 1080p'
+									},
+
+                                                                        {
+										"title": "720p",
+										"description": "",
+										"rowId": prefix + 'ytmp4 ' + anu.url + ' 720p'
+									},
+                                                                        {
+										"title": "480p",
+										"description": "",
+										"rowId": prefix + 'ytmp4 ' + anu.url + ' 480p'
+									},
+                                                                        {
+										"title": "360p",
+										"description": "",
+										"rowId": prefix + 'ytmp4 ' + anu.url + ' 360p'
+									},
+                                                                        {
+										"title": "240p",
+										"description": "",
+										"rowId": prefix + 'ytmp4 ' + anu.url + ' 240p'
+									},
+						                        {
+										"title": "144p",
+										"description": "",
+										"rowId": prefix + 'ytmp4 ' + anu.url + ' 144p'
+									}
+								]
+							},
+							{
+								"title": "Advance Mp3 Audio",
+								"rows": [
+									{
+										"title": "High",
+										"description": "",
+										"rowId": prefix + 'ytmp3 ' + anu.url + ' 320kbps'
+									},
+									{
+										"title": "Medium",
+										"description": "",
+										"rowId": prefix + 'ytmp3 ' + anu.url + ' 160kbps'
+										},
+									{
+										"title": "Low",
+										"description": "",
+										"rowId": prefix + 'ytmp3 ' + anu.url + ' 60kbps'
+										}
+										
+								]
+							},
+							{
+								"title": "Advance Mp3 Document",
+								"rows": [
+									{
+										"title": "High",
+										"description": "",
+										"rowId": prefix + 'ytdoc ' + anu.url + ' 320kbps'
+									},
+									{
+										"title": "Medium",
+										"description": "",
+										"rowId": prefix + 'ytdoc ' + anu.url + ' 160kbps'
+										},
+									{
+										"title": "Low",
+										"description": "",
+										"rowId": prefix + 'ytdoc ' + anu.url + ' 60kbps'
+										}
+								]
+							}
+							
+						]
+  }
+            await conn.sendMessage(from, listMessage, {quoted: mek })
+            }
+            break
 
 				  case 'ytmp3': {
 					await conn.sendMessage(from, { react: { text: '⬇️', key: mek.key }})
