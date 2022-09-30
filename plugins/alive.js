@@ -11,7 +11,7 @@ async function alive(conn , mek) {
    const buttonMessage = {
     caption: config.ALIVE_MSG ,
     footer: 'EDM BOT BASE',
-    templateButtons: buttons,
+    buttons: buttons,
     image: {url: config.ALIVE_LOGO}
 }                             
 await conn.sendMessage(from, buttonMessage )
