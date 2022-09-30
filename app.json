@@ -4,20 +4,7 @@
   "repository": "https://github.com/edm-official/whatsapp-base",
   "logo": "",
   "keywords": ["nodejs", "bot", "whatsapp bot", "whatsapp automation", "multi device"],
-  "env": {
-  
-  "ALIVE_MSG" :{
-    "description" : "Alive message",
-    "required" : true,
-    "value" : "alive now"
-    },
-  
-   "ANTI_SPAM" :{
-    "description" : "alive logo",
-    "required" : true,
-  "value" : "https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/WhatsApp_logo-color-vertical.svg/220px-WhatsApp_logo-color-vertical.svg.png"
-    }
-  },
+ 
   "buildpacks": [
     {
       "url": "heroku/nodejs"
