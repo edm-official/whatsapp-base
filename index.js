@@ -12,7 +12,7 @@ const util = require('util')
 const { state, saveState } = useSingleFileAuthState('./session.json')
 
 const prefix = '.'
-const staff = ['595995660558']
+const owner = ['94766866297']
 
 const connectToWA = () => {
 	const conn = makeWASocket({
@@ -28,7 +28,7 @@ const connectToWA = () => {
 				connectToWA()
 			}
 		} else if (connection === 'open') {
-			console.log('Bot conectado')
+			console.log('Bot Connected')
 		}
 	})
 	
@@ -60,7 +60,7 @@ const connectToWA = () => {
 			const pushname = mek.pushName || 'Sin Nombre'
 			
 			const isMe = botNumber.includes(senderNumber)
-			const isStaff = staff.includes(senderNumber) || isMe
+			const isowner = owner.includes(senderNumber) || isMe
 			
 			const reply = (teks) => {
 				conn.sendMessage(from, { text: teks }, { quoted: mek })
@@ -75,11 +75,13 @@ case 'alive' : {
 ]
 			await conn.sendMessage(from, { image: {url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/WhatsApp_logo-color-vertical.svg/640px-WhatsApp_logo-color-vertical.svg.png'  }, caption: 'I Am Alive Now' , footer: 'EDM BOT BASE' , buttons: buttons , headerType: 4} , { quoted: mek } )	
 			   
-		   } break
+		   }
+					break
 
+				
 				default:
 					
-					if (isStaff && body.startsWith('>')) {
+					if (isowner && body.startsWith('>')) {
 						try {
 							await reply(util.format(await eval(`(async () => {${body.slice(1)}})()`)))
 						} catch(e) {
