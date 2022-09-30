@@ -116,7 +116,7 @@ let buttons = [
 ]
 let buttonMessage = {
 image: { url: anu.thumbnail },
-caption: '┌───[🐉EDM BOT🐉]\n\n  *📥YOUTUBE DOWNLODER*\n\n│🎧sᴏɴɢ: ' + anu.title + '\n\n│ 👀ᴠɪᴇᴡs: ' + anu.views + '\n\n│ 📹 ᴄʜᴀɴɴᴇʟ: ' + anu.author + '\n\n│🖇️ᴜʀʟ: ' + anu.url + '\n\n└───────────◉',
+caption: '┌───[🐉EDM BOT🐉]\n\n  *📥YOUTUBE DOWNLODER*\n\n│🧚🏻‍♀️ᴛɪᴛʟᴇ: ' + anu.title + '\n\n│ 👀ᴠɪᴇᴡs: ' + anu.views + '\n\n│ 📹 ᴄʜᴀɴɴᴇʟ: ' + anu.author + '\n\n│🖇️ᴜʀʟ: ' + anu.url + '\n\n└───────────◉',
 footer: 'sᴇʟᴇᴄᴛ ꜰᴏʀᴍᴀᴛ:',
 buttons: buttons,
 headerType: 4,
@@ -145,6 +145,31 @@ headerType: 4,
 conn.sendMessage(from, buttonMessage, { quoted: mek })
 }
 break
+					
+					
+					case 'video':  {
+            
+    conn.sendMessage(from, { react: { text: '📽️', key: mek.key }})
+    if (!q) return reply('Example : ' + prefix + command + ' lelena')
+let yts = require("yt-search")
+let search = await yts(q)
+let anu = search.videos[0]
+let buttons = [
+{buttonId: prefix + 'ytmp4 ' +  anu.url + '360p', buttonText: {displayText: '360p'}, type: 1},
+{buttonId: prefix + 'ytmp4 ' + anu.url + '480p', buttonText: {displayText: '480p'}, type: 1},
+{buttonId: prefix + 'ytmp4 ' + anu.url + '720p', buttonText: {displayText: '720p'}, type: 1}
+]
+let buttonMessage = {
+image: { url: anu.thumbnail },
+caption: '┌───[🐉EDM BOT🐉]\n\n  *📥YT VIDEO DOWNLODER*\n\n│📽️ᴠɪᴅᴇᴏ: ' + anu.title + '\n\n│ 👀ᴠɪᴇᴡs: ' + anu.views + '\n\n│ 📹 ᴄʜᴀɴɴᴇʟ: ' + anu.author + '\n\n│🖇️ᴜʀʟ: ' + anu.url + '\n\n└───────────◉',
+footer: 'sᴇʟᴇᴄᴛ Qᴜᴀʟɪᴛʏ:',
+buttons: buttons,
+headerType: 4,
+}
+conn.sendMessage(from, buttonMessage, { quoted: mek })
+}
+break
+
 
 case 'ytdoc': {
 	await conn.sendMessage(from, { react: { text: '⬇️', key: mek.key }})
