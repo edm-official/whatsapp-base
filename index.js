@@ -222,7 +222,7 @@ case 'ytdoc': {
         let anu = search.videos[0]
                 	   
 const listMessage = {
-      text: '┌───[🐉EDM BOT🐉]\n\n  *📥ADVANCE DOWNLODER*\n\n│🏻‍♀️ᴛɪᴛʟᴇ: ' + anu.title + '\n\n│ 👀ᴠɪᴇᴡs: ' + anu.views + '\n\n│ 📹 ᴄʜᴀɴɴᴇʟ: ' + anu.author + '\n\n│🖇️ᴜʀʟ: ' + anu.url + '\n\n└───────────◉',
+      text: '┌───[🐉EDM BOT🐉]\n\n  *📥ADVANCE DOWNLODER*\n\n│🧚ᴛɪᴛʟᴇ: ' + anu.title + '\n\n│ 👀ᴠɪᴇᴡs: ' + anu.views + '\n\n│ 📹 ᴄʜᴀɴɴᴇʟ: ' + anu.author + '\n\n│🖇️ᴜʀʟ: ' + anu.url + '\n\n└───────────◉',
       footer: config.FOOTER,
       title: 'Hello ' + pushname ,
       buttonText: "Results",
