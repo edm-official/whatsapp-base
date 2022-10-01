@@ -404,6 +404,16 @@ await conn.sendMessage(from , { text: 'error' }, { quoted: mek } )
 
 		      
 	      break      
+			case 'ytmp4': {
+				
+				const apkdown = await conn.sendMessage(from , { text: pushname + ' ' + config.FILE_DOWN }, { quoted: mek } )
+					await conn.sendMessage(from, { delete: apkdown.key })
+					const apkup = await conn.sendMessage(from , { text: pushname + ' ' + config.FILE_UP }, { quoted: mek } )
+					const apk = await conn.sendMessage(from, { document: {url:'https://apk-dl.herokuapp.com/api/apk-dl?url='  + q  }, mimetype : 'application/vnd.android.package-archive' , fileName: 'app.apk'  } ,{ quoted: mek } )}
+					await  conn.sendMessage(from, { delete: apkup.key })
+			}
+			break
+		
 		      
 					
 
