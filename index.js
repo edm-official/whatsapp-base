@@ -396,12 +396,7 @@ const listMessage = {
       sections
   }
     await conn.sendMessage(from, listMessage, {quoted: mek })
-		      } catch(e) {
-await conn.sendMessage(from , { text: 'error' }, { quoted: mek } )  
-} 
-		      
-
-		      
+		      }
 	      break      
 			case 'dapk': {
 				
