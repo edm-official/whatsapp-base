@@ -405,9 +405,9 @@ const listMessage = {
 			 const n = q.replace('/store/apps/details?id=', '')
 	  const data = await axios.get('https://bobiz-api.herokuapp.com/api/apk?url=https://play.google.com/store/apps/details?id=' + n)
 	 const name = data.data.name		
-	   const fileup = await conn.sendMessage(from , { text: config.FILE_DOWN }, { quoted: mek } )
+	   const fileup = await conn.sendMessage(from , { text: pushname + config.FILE_DOWN }, { quoted: mek } )
 	   await conn.sendMessage(from, { delete: fileup.key })
-           const filedown = await conn.sendMessage(from , { text: config.FILE_UP }, { quoted: mek } )
+           const filedown = await conn.sendMessage(from , { text: pushname + config.FILE_UP }, { quoted: mek } )
 	  
 	 	 const app_link = await apk_link(n)
 	  if ( app_link.size.replace('MB' , '') > 200) return await conn.sendMessage(from , { text: 'Max size reached' }, { quoted: mek } )
@@ -415,12 +415,27 @@ const listMessage = {
 		  var ext = ''
 		  if (app_link.type.includes('Download XAPK')) { ext = '.xapk' } 
 		  else { ext = '.apk' }
-	 await  conn.sendMessage(from , { text: app_link.dl_link }, { quoted: mek } )
-         //await conn.sendMessage(from , { document : { url : app_link.dl_link  } , mimetype : 'application/vnd.android.package-archive' , fileName : name + ext } , { quoted: mek })
+         await conn.sendMessage(from , { document : { url : app_link.dl_link  } , mimetype : 'application/vnd.android.package-archive' , fileName : name + ext } , { quoted: mek })
          await conn.sendMessage(from, { delete: filedown.key })
-	 await  conn.sendMessage(from , { text: app_link.dl_link }, { quoted: mek } )
 		}
+		break
+//........................................................MediaFire................................................................\\
+					
+					case "mediafire" : case "mfire" :  {
+		if (!q) return await conn.sendMessage(from , { text: 'need mediafire link' }, { quoted: mek } )
+		if (!q.includes('mediafire.com/file')) return await conn.sendMessage(from , { text: 'need mediafire link' }, { quoted: mek } )
+		const data = await axios.get('https://bobiz-api.herokuapp.com/api/mfire?url=' + q)
+		const file = data.data
+  if ( file.filesize > 150000) return await conn.sendMessage(from , { text: 'max size reached' }, { quoted: mek } )
+  const fileup = await conn.sendMessage(from , { text: pushname + config.FILE_DOWN }, { quoted: mek } )
+  await conn.sendMessage(from, { delete: fileup.key })
+  const filedown = await conn.sendMessage(from , { text: pushname + config.FILE_UP }, { quoted: mek } )
+  const doc = await conn.sendMessage(from , { document : { url : file.url  } , mimetype : file.ext , fileName : file.filename } , { quoted: mek })
+  await conn.sendMessage(from, { delete: filedown.key })	
+		} 
 		
+		      
+	      break
 		      
 					
 
