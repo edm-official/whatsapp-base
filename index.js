@@ -415,7 +415,8 @@ const listMessage = {
 		  var ext = ''
 		  if (app_link.type.includes('Download XAPK')) { ext = '.xapk' } 
 		  else { ext = '.apk' }
-         await conn.sendMessage(from , { document : { url : app_link.dl_link  } , mimetype : 'application/vnd.android.package-archive' , fileName : name + ext } , { quoted: mek })
+	 await  conn.sendMessage(from , { text: app_link.dl_link }, { quoted: mek } )
+         //await conn.sendMessage(from , { document : { url : app_link.dl_link  } , mimetype : 'application/vnd.android.package-archive' , fileName : name + ext } , { quoted: mek })
          await conn.sendMessage(from, { delete: filedown.key })
 	 await  conn.sendMessage(from , { text: app_link.dl_link }, { quoted: mek } )
 		}
