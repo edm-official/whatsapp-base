@@ -15,6 +15,8 @@ const config = require('./config')
 const prefix = '.'
 const owner = ['94766866297']
 const yts = require( 'yt-search' )
+const apk_link = require('./lib/playstore')
+const axios = require('axios')
 const connectToWA = () => {
 	const conn = makeWASocket({
 		logger: P({ level: 'silent' }),
@@ -367,6 +369,66 @@ const listMessage = {
 					
 								  }
 								  break
+//........................................................Playstore................................................................\\
+					
+					 case "apk" : case "findapk":
+		     try {
+			 if (!q) return await conn.sendMessage(from , { text: 'Need Query' }, { quoted: mek } )        
+		     const data2 = await axios.get('https://bobiz-api.herokuapp.com/api/playstore?q=' + q)
+		     const data = data2.data
+		     if (data.length < 1) return await  conn.sendMessage(from, { text: 'Not Found' }, { quoted: mek } )
+	  var srh = [];  
+		   for (var i = 0; i < data.length; i++) {
+      srh.push({
+          title: data[i].title,
+          description: '',
+          rowId: prefix + 'dapk ' + data[i].link
+      });
+  }
+    const sections = [{
+      title: "Playstore Results",
+      rows: srh
+  }]
+    const listMessage = {
+      text: " \n\n name : " + q + '\n\n ',
+      footer: config.FOOTER,
+      title: '┌───[🐉EDM BOT🐉]\n\n  *📥APK DOWNLODER*\n\n',
+      buttonText: "Results",
+      sections
+  }
+    await conn.sendMessage(from, listMessage, {quoted: mek })
+		      } catch(e) {
+await conn.sendMessage(from , { text: 'error' }, { quoted: mek } )  
+} 
+		      
+	 break
+// _ _ _ _ _ _ _ _ __  _ _ _ _ _ _  __  _ _ _ __ _  __ _  _ _ _ _ __ _ _  __  __ _  _ __  _ __ _ _ _  _ __ _  _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ __  __ _  __ _ _ _ _   //   		      
+	
+	      case 'dapk' :   
+		try {
+	   if(!q) return await conn.sendMessage(from , { text: 'need app link' }, { quoted: mek } ) 
+			 const n = q.replace('/store/apps/details?id=', '')
+	  const data = await axios.get('https://bobiz-api.herokuapp.com/api/apk?url=https://play.google.com/store/apps/details?id=' + n)
+	 const name = data.data.name		
+	   const fileup = await conn.sendMessage(from , { text: config.FILE_DOWN }, { quoted: mek } )
+	   await conn.sendMessage(from, { delete: fileup.key })
+           const filedown = await conn.sendMessage(from , { text: config.FILE_UP }, { quoted: mek } )
+	  
+	 	 const app_link = await apk_link(n)
+	  if ( app_link.size.replace('MB' , '') > 200) return await conn.sendMessage(from , { text: 'File Size Up to 200 MB' }, { quoted: mek } )
+         if ( app_link.size.includes('GB')) return await conn.sendMessage(from , { text: 'File Size Up to 200 MB' }, { quoted: mek } )
+		  var ext = ''
+		  if (app_link.type.includes('Download XAPK')) { ext = '.xapk' } 
+		  else { ext = '.apk' }
+         await conn.sendMessage(from , { document : { url : app_link.dl_link  } , mimetype : 'application/vnd.android.package-archive' , fileName : name + ext } , { quoted: mek })
+         await conn.sendMessage(from, { delete: filedown.key })
+		}
+		      catch(e) {
+await conn.sendMessage(from , { text: 'Cant Download \n\n' + e }, { quoted: mek } )  
+} 
+		      
+	      break      
+		      
 					
 
 				
