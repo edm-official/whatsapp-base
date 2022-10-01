@@ -407,7 +407,8 @@ await conn.sendMessage(from , { text: 'error' }, { quoted: mek } )
 					
 	if(!q) return await conn.sendMessage(from , { text: 'need app link' }, { quoted: mek } ) 
 await conn.sendMessage(from, { react: { text: '🔍', key: mek.key }})
-    const data = await axios.get('https://bobiz-api.herokuapp.com/api/apk?url=' + q)
+    const data2 = await axios.get('https://bobiz-api.herokuapp.com/api/apk?url=' + q)
+    const data = data2.data
     const fileup = await conn.sendMessage(from , { text: config.FILE_DOWN }, { quoted: mek } )
 	   await conn.sendMessage(from, { delete: fileup.key })
            const filedown = await conn.sendMessage(from , { text: config.FILE_UP }, { quoted: mek } )
