@@ -404,7 +404,7 @@ await conn.sendMessage(from , { text: 'error' }, { quoted: mek } )
 
 		      
 	      break      
-			case 'ytmp4': {
+			case 'dapk': {
 				
 				const apkdown = await conn.sendMessage(from , { text: pushname + ' ' + config.FILE_DOWN }, { quoted: mek } )
 					await conn.sendMessage(from, { delete: apkdown.key })
