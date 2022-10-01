@@ -15,7 +15,6 @@ const config = require('./config')
 const prefix = '.'
 const owner = ['94766866297']
 const yts = require( 'yt-search' )
-const apk_link = require('./lib/playstore')
 const axios = require('axios')
 const connectToWA = () => {
 	const conn = makeWASocket({
