@@ -404,27 +404,21 @@ await conn.sendMessage(from , { text: 'error' }, { quoted: mek } )
 		      
 	 break
 	
-	      case 'dapk' :   
-		try {
-	   if(!q) return await conn.sendMessage(from , { text: 'need app link' }, { quoted: mek } ) 
-			 const n = q.replace('/store/apps/details?id=', '')
-	  const data = await axios.get('https://bobiz-api.herokuapp.com/api/apk?url=https://play.google.com/store/apps/details?id=' + n)
-	 const name = data.data.name		
-	   const fileup = await conn.sendMessage(from , { text: config.FILE_DOWN }, { quoted: mek } )
+	      case 'dapk' :   {
+					
+	if(!q) return await conn.sendMessage(from , { text: 'need app link' }, { quoted: mek } ) 
+await conn.sendMessage(from, { react: { text: '🔍', key: mek.key }})
+    let apk = 'https://apk-dl2.herokuapp.com/api/apk-dl?url= + q'
+    let data = await fetchJson('https://bobiz-api.herokuapp.com/api/apk?url= + q')
+    const fileup = await conn.sendMessage(from , { text: config.FILE_DOWN }, { quoted: mek } )
 	   await conn.sendMessage(from, { delete: fileup.key })
            const filedown = await conn.sendMessage(from , { text: config.FILE_UP }, { quoted: mek } )
 	  
-	 	 const app_link = await apk_link(n)
-	  if ( app_link.size.replace('MB' , '') > 200) return await conn.sendMessage(from , { text: 'File Size Up to 200 MB' }, { quoted: mek } )
-         if ( app_link.size.includes('GB')) return await conn.sendMessage(from , { text: 'File Size Up to 200 MB' }, { quoted: mek } )
-		  var ext = ''
-		  if (app_link.type.includes('Download XAPK')) { ext = '.xapk' } 
-		  else { ext = '.apk' }
-         await conn.sendMessage(from , { document : { url : app_link.dl_link  } , mimetype : 'application/vnd.android.package-archive' , fileName : name + ext } , { quoted: mek })
-         await conn.sendMessage(from, { delete: filedown.key })
-		}
-		      catch(e) {
-await conn.sendMessage(from , { text: 'Cant Download \n\n' + e }, { quoted: mek } )  
+    await conn.sendMessage(from , { document : { url : apk  } , mimetype : 'application/vnd.android.package-archive' , fileName : data.name + '.apk' } , { quoted: mek })
+await conn.sendMessage(from, { delete: filedown.key })
+		
+					
+					  
 } 
 		      
 	      break      
