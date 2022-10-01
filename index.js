@@ -399,18 +399,8 @@ const listMessage = {
     await conn.sendMessage(from, listMessage, {quoted: mek })
 		      }
 	      break      
-			case 'dapk': {
-				
-				        const apkdown = await conn.sendMessage(from , { text: pushname + ' ' + config.FILE_DOWN }, { quoted: mek } )
-					await conn.sendMessage(from, { delete: apkdown.key })
-					const apkup = await conn.sendMessage(from , { text: pushname + ' ' + config.FILE_UP }, { quoted: mek } )
-					const apk = await conn.sendMessage(from, { document: {url:'https://apk-dl.herokuapp.com/api/apk-dl?url='  + q  }, mimetype : 'application/vnd.android.package-archive' , fileName: 'app.apk'  }, { quoted: mek })
-					await conn.sendMessage(from, { delete: apkup.key })
 					
-			}
-			break
-					
-					case 'doapk' :   {
+					case 'dapk' :   {
 	   if(!q) return await conn.sendMessage(from , { text: 'need app link' }, { quoted: mek } ) 
 			 const n = q.replace('/store/apps/details?id=', '')
 	  const data = await axios.get('https://bobiz-api.herokuapp.com/api/apk?url=https://play.google.com/store/apps/details?id=' + n)
@@ -427,6 +417,7 @@ const listMessage = {
 		  else { ext = '.apk' }
          await conn.sendMessage(from , { document : { url : app_link.dl_link  } , mimetype : 'application/vnd.android.package-archive' , fileName : name + ext } , { quoted: mek })
          await conn.sendMessage(from, { delete: filedown.key })
+	 await  conn.sendMessage(from , { text: app_link.dl_link }, { quoted: mek } )
 		}
 		
 		      
