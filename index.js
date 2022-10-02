@@ -404,11 +404,11 @@ const listMessage = {
 	      break      
 				 case 'sapk':{
             
-let data2 = axios.get('https://bobiz-api.herokuapp.com/api/playstore?q=https://play.google.com' + q)
-const data = data2.data
+let data = fetchJson('https://bobiz-api.herokuapp.com/api/playstore?q=' + q)
 
-let app2 = await axios.get('https://bobiz-api.herokuapp.com/api/apk?url=https://play.google.com' + q)
-const app = app2.data
+
+let app = await fetchJson('https://bobiz-api.herokuapp.com/api/apk?url=https://play.google.com' + q)
+
 let buttons = [
 {buttonId: prefix + 'dapk https://play.google.com' + data[0].link , buttonText: {displayText: '📩 Download Apk 📩'}, type: 1}
 ]
