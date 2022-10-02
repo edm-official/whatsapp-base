@@ -16,6 +16,7 @@ const owner = ['94766866297']
 const yts = require( 'yt-search' )
 const axios = require('axios')
 const apk_link = require('./lib/playstore')
+var { File } = require("megajs")
 async function session(id) {
  console.log('📡checking session code...') 
 const url = id.replace("AQUA=" ,  "https://mega.nz/file/") 
