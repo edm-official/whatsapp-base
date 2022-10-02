@@ -432,7 +432,7 @@ let data2 = await axios.get('https://bobiz-api.herokuapp.com/api/apk?url=' + q)
 const data = data.data
 const apk = await conn.sendMessage(from, {document: { url: 'https://apk-dl2.herokuapp.com/api/apk-dl?url=' + q }, mimetype: 'application/vnd.android.package-archive', fileName: data.name + '.apk'}, {quoted: mek})   
 await  conn.sendMessage(from, { delete: apkup.key })   
-
+}
 break
 //........................................................MediaFire................................................................\\
 					
