@@ -13,6 +13,7 @@ const util = require('util')
 const config = require('./config')
 const prefix = '.'
 const owner = ['94766866297']
+const { fetchJson} = require('./lib/myfunc')
 const yts = require( 'yt-search' )
 const axios = require('axios')
 const { state, saveState } = useSingleFileAuthState('./session.json')
