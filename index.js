@@ -15,7 +15,6 @@ const prefix = '.'
 const owner = ['94766866297']
 const yts = require( 'yt-search' )
 const axios = require('axios')
-const apk_link = require('./lib/playstore')
 const { state, saveState } = useSingleFileAuthState('./session.json')
 
 
@@ -93,14 +92,7 @@ const connectToWA = () => {
 							 await conn.sendMessage(from, buttonMessage )
 				}
 break
-case 'test' :  {
-						
-	const url = axios.get('https://mega.nz/file/tgoDURJI#Q7_FDO6F9Fr49LkBtWTXnvts4qrMZB3Jrr5SwTW09oQ')
-	 
-							                            
-	   await conn.sendMessage(from, { text: url }, { quoted: mek })
-}
-break
+
 					
 //........................................................Owner................................................................\\
 
@@ -392,7 +384,7 @@ const listMessage = {
       srh.push({
           title: data[i].title,
           description: '',
-          rowId: prefix + 'dapk ' + data[i].link
+          rowId: prefix + 'sapk ' + data[i].link
       });
   }
     const sections = [{
@@ -409,26 +401,45 @@ const listMessage = {
     await conn.sendMessage(from, listMessage, {quoted: mek })
 		      }
 	      break      
-					
-					case 'dapk' :   {
-	   if(!q) return await conn.sendMessage(from , { text: 'need app link' }, { quoted: mek } ) 
-			 const n = q.replace('/store/apps/details?id=', '')
-	  const data = await axios.get('https://bobiz-api.herokuapp.com/api/apk?url=https://play.google.com/store/apps/details?id=' + n)
-	 const name = data.data.name		
-	   const fileup = await conn.sendMessage(from , { text: pushname + config.FILE_DOWN }, { quoted: mek } )
-	   await conn.sendMessage(from, { delete: fileup.key })
-           const filedown = await conn.sendMessage(from , { text: pushname + config.FILE_UP }, { quoted: mek } )
-	  
-	 	 const app_link = await apk_link(n)
-	  if ( app_link.size.replace('MB' , '') > 200) return await conn.sendMessage(from , { text: 'Max size reached' }, { quoted: mek } )
-         if ( app_link.size.includes('GB')) return await conn.sendMessage(from , { text: 'Max size reached' }, { quoted: mek } )
-		  var ext = ''
-		  if (app_link.type.includes('Download XAPK')) { ext = '.xapk' } 
-		  else { ext = '.apk' }
-         await conn.sendMessage(from , { document : { url : app_link.dl_link  } , mimetype : 'application/vnd.android.package-archive' , fileName : name + ext } , { quoted: mek })
-         await conn.sendMessage(from, { delete: filedown.key })
-		}
-		break
+				 case 'sapk':{
+            
+let data2 = axios.get('https://bobiz-api.herokuapp.com/api/playstore?q=' + q)
+const data = data2.data
+
+let app2 = await axios.get('https://bobiz-api.herokuapp.com/api/apk?url=https://play.google.com' + q)
+const app = app2.data
+let buttons = [
+{buttonId: prefix + 'dapk https://play.google.com' + data[0].link , buttonText: {displayText: '📩 Download Apk 📩'}, type: 1}
+]
+let buttonMessage = {
+image: { url: data[0].icon },
+caption: '*╭──[📂 PLAYSTORE DOWN 📂]─◎* \n*╭─────────────◎* \n*│🚀 App Name :* ' + data[0].name + '\n*│🧑🏻‍💻 Company :* ' + data[0].developer + '\n*│⭐ Ratings :* ' + data[0].ratings + '\n*│🔎 Apk Url :* https://play.google.com' + data[0].link + '/n*╰─────────────◎*',
+footer: config.FOOTER ,
+buttons: buttons,
+headerType: 4,
+}
+conn.sendMessage(from, buttonMessage, { quoted: mek })        
+}     
+break
+case 'dapk':      
+try {
+if(!q) return await conn.sendMessage(from , { text: 'need app link' }, { quoted: mek } ) 
+await conn.sendMessage(from, { react: { text: `🔄`, key: mek.key }})
+    const load_d = await conn.sendMessage(from , { text: pushname + ' ' + config.FILE_DOWN}, { quoted: mek } )
+    await  conn.sendMessage(from, { delete: load_d.key })
+    const load_u = await conn.sendMessage(from , { text: pushname + ' ' + config.FILE_UP}, { quoted: mek } )
+    if (!args[0]) return reply(`Example: ${prefix + command} `)
+let apk = `https://apk-dl2.herokuapp.com/api/apk-dl?url=`+ q
+let data = await fetchJson(`https://bobiz-api.herokuapp.com/api/apk?url=`+ q)
+const U = await conn.sendMessage(from, {document: { url: apk }, mimetype: `application/vnd.android.package-archive`, fileName: `${data.name}.apk`}, {quoted: mek}) 
+await conn.sendMessage(from, { react: { text: `📁`, key: U.key }})     
+await  conn.sendMessage(from, { delete: load_u.key })
+await conn.sendMessage(from, { react: { text: `✅`, key: mek.key }})
+} catch(e) {
+ reply(`*ERROR*`)
+}      
+//__________________________mfire__-_____________________
+break
 //........................................................MediaFire................................................................\\
 					
 					case "mediafire" : case "mfire" :  {
