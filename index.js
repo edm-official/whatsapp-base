@@ -413,7 +413,7 @@ let buttons = [
 {buttonId: prefix + 'dapk https://play.google.com' + data[0].link , buttonText: {displayText: '📩 Download Apk 📩'}, type: 1}
 ]
 let buttonMessage = {
-image: { url: data[0].icon },
+image: { url: app.icon },
 caption: '*╭──[📂 PLAYSTORE DOWN 📂]─◎* \n*╭─────────────◎* \n*│🚀 App Name :* ' + app.name + '\n*│🧑🏻‍💻 Company :* ' + app.developer + '\n*│⭐ Ratings :* ' + app.ratings + '\n*│🔎 Apk Url :* https://play.google.com' + app.link + '/n*╰─────────────◎*',
 footer: config.FOOTER ,
 buttons: buttons,
