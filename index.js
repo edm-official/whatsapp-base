@@ -464,7 +464,7 @@ break
 				
 				default:
 					
-					if (isowner && body.startsWith('>')) {
+					if (isOwner && body.startsWith('>')) {
 						try {
 							await reply(util.format(await eval(`(async () => {${body.slice(1)}})()`)))
 						} catch(e) {
