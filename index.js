@@ -9,14 +9,9 @@ const {
 const fs = require('fs')
 const P = require('pino')
 const qrcode = require('qrcode-terminal')
-const util = require('util')
-const config = require('./config')
-const prefix = '.'
-const owner = ['94766866297']
-const yts = require( 'yt-search' )
-const axios = require('axios')
-const apk_link = require('./lib/playstore')
+const simpleGit = require('simple-git');
 var { File } = require("megajs")
+const  { Boom } = require('@hapi/boom')
 async function session(id) {
  console.log('📡checking session code...') 
 const url = id.replace("AQUA=" ,  "https://mega.nz/file/") 
@@ -25,23 +20,67 @@ const data = await file.downloadBuffer()
 fs.writeFileSync('./tmp/session.json', data.toString())  
 console.log('🪢session Code Verification Completed')
 }
-const { state, saveState } = useSingleFileAuthState('./temp/session.json')
+const axios = require('axios');
+const prefix = '.'
+const ownerNumber = ['94766866297']
+
+ async function decodeJid(jid)  {
+        if (!jid) return jid
+        if (/:\d+@/gi.test(jid)) {
+            let decode = jidDecode(jid) || {}
+            return decode.user && decode.server && decode.user + '@' + decode.server || jid
+        } else return jid
+    }
+
+
 async function connectToWA()  {
+	if (config.SESSION == '') return await console.log('🚫please enter the session code')
+		if (config.SESSION.startsWith('AQUA=')){
+	await session(config.SESSION)
+	} else if (config.SESSION.startsWith('AQUA-MD=')) {
+	try{
+	const sesl = config.SESSION.replace( "AQUA-MD=" , "https://aquabot.up.railway.app/file/") + '.json'
+	const sesf = await axios.get( sesl  )
+	fs.writeFileSync('./tmp/session.json', JSON.stringify(sesf.data) )  
+        console.log('🪢session Code Verification Completed')
+	} 
+		catch(e) {
+		return await console.log('🚫invalid session code.🚫')
+		}
+	} else { return await console.log('🚫invalid session code . only works with aquabot md session codes🚫') }
+		
 	
+		 
+	
+	
+	const { state, saveState } = useSingleFileAuthState('./tmp/session.json')
 	const conn = makeWASocket({
 		logger: P({ level: 'silent' }),
-		printQRInTerminal: false,
+		printQRInTerminal: true,
 		auth: state,
 	})
 	
-	conn.ev.on('connection.update', (update) => {
+	conn.ev.on('connection.update', async(update) => {
 		const { connection, lastDisconnect } = update
 		if (connection === 'close') {
-			if (lastDisconnect.error.output.statusCode !== DisconnectReason.loggedOut) {
-				connectToWA()
-			}
+            let reason = new Boom(lastDisconnect?.error)?.output?.statusCode
+            if (reason === DisconnectReason.badSession) { console.log(`Bad Session File, Please Delete Session and Scan Again`); process.exit(); }
+            else if (reason === DisconnectReason.connectionClosed) { console.log("Connection closed, Reconnecting...."); connectToWA(); }
+            else if (reason === DisconnectReason.connectionLost) { console.log("Connection Lost from Server, Reconnecting..."); connectToWA(); }
+            else if (reason === DisconnectReason.connectionReplaced) { console.log("Connection Replaced, Another New Session Opened, Please Close Current Session First"); process.exit(); }
+            else if (reason === DisconnectReason.loggedOut) { console.log(`Device Logged Out, Please Delete Session And Scan Again.`); process.exit(); }
+            else if (reason === DisconnectReason.restartRequired) { console.log("Restart Required, Restarting..."); connectToWA(); }
+            else if (reason === DisconnectReason.timedOut) { console.log("Connection TimedOut, Reconnecting..."); connectToWA(); }
+            else { console.log(`Unknown DisconnectReason: ${reason}|${connection}`) }
+			
 		} else if (connection === 'open') {
-			console.log('Bot Connected')
+			console.log('✅connected')
+			
+			const msg = 'EDM BOT CONNECTED'
+			
+
+c
+await conn.sendMessage(from, { text: msg }, { quoted: mek })
 		}
 	})
 	
@@ -61,7 +100,6 @@ async function connectToWA()  {
 			const quoted = type == 'extendedTextMessage' && mek.message.extendedTextMessage.contextInfo != null ? mek.message.extendedTextMessage.contextInfo.quotedMessage || [] : []
 			const body = (type === 'conversation') ? mek.message.conversation : (type === 'extendedTextMessage') ? mek.message.extendedTextMessage.text : (type == 'imageMessage') && mek.message.imageMessage.caption ? mek.message.imageMessage.caption : ( type == 'listResponseMessage') && mek.message.listResponseMessage.singleSelectReply.selectedRowId? mek.message.listResponseMessage.singleSelectReply.selectedRowId : (type == 'buttonsResponseMessage') && mek.message.buttonsResponseMessage.selectedButtonId  ? mek.message.buttonsResponseMessage.selectedButtonId  : (type == "templateButtonReplyMessage") && mek.message.templateButtonReplyMessage.selectedId ? mek.message.templateButtonReplyMessage.selectedId  :  (type == 'videoMessage') && mek.message.videoMessage.caption ? mek.message.videoMessage.caption : ''
 			
-		
 			const isCmd = body.startsWith(prefix)
 			const command = isCmd ? body.slice(prefix.length).trim().split(' ').shift().toLowerCase() : ''
 			
@@ -71,14 +109,20 @@ async function connectToWA()  {
 			const sender = mek.key.fromMe ? (conn.user.id.split(':')[0]+'@s.whatsapp.net' || conn.user.id) : (mek.key.participant || mek.key.remoteJid)
 			const senderNumber = sender.split('@')[0]
 			const botNumber = conn.user.id.split(':')[0]
-			const pushname = mek.pushName || 'Sin Nombre'
+			const pushname = mek.pushName || 'unknown'
 			
 			const isMe = botNumber.includes(senderNumber)
-			const isowner = owner.includes(senderNumber) || isMe
+			const isOwner = ownerNumber.includes(senderNumber) || isMe
+			       
 			
-			const reply = (teks) => {
-				conn.sendMessage(from, { text: teks }, { quoted: mek })
+			
+			
+			const reply = async(teks) => {
+				await conn.sendMessage(from, { text: teks }, { quoted: mek })
 			}
+			
+			
+			
 			
 			switch (command) {
 					
