@@ -386,7 +386,7 @@ const listMessage = {
       srh.push({
           title: data[i].title,
           description: '',
-          rowId: prefix + 'sapk ' + data[i].link
+          rowId: prefix + 'sapk ' + q
       });
   }
     const sections = [{
@@ -404,11 +404,13 @@ const listMessage = {
 		      }
 	      break      
 				 case 'sapk':{
+					 
+					
             
-let data = fetchJson('https://bobiz-api.herokuapp.com/api/playstore?q=' + q)
+let data = await fetchJson('https://bobiz-api.herokuapp.com/api/playstore?q=' + q)
 
 
-let app = await fetchJson('https://bobiz-api.herokuapp.com/api/apk?url=https://play.google.com' + q)
+let app = await fetchJson('https://bobiz-api.herokuapp.com/api/apk?url=https://play.google.com' + data[0].link)
 
 let buttons = [
 {buttonId: prefix + 'dapk https://play.google.com' + data[0].link , buttonText: {displayText: '📩 Download Apk 📩'}, type: 1}
