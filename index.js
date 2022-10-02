@@ -27,20 +27,7 @@ console.log('🪢session Code Verification Completed')
 }
 const { state, saveState } = useSingleFileAuthState('./temp/session.json')
 async function connectToWA()  {
-	if (config.SESSION == '') return await console.log('🚫please enter the session code')
-		if (config.SESSION.startsWith('AQUA=')){
-	await session(config.SESSION)
-	} else if (config.SESSION.startsWith('AQUA-MD=')) {
-	try{
-	const sesl = config.SESSION.replace( "AQUA-MD=" , "https://aquabot.up.railway.app/file/") + '.json'
-	const sesf = await axios.get( sesl  )
-	fs.writeFileSync('./tmp/session.json', JSON.stringify(sesf.data) )  
-        console.log('🪢session Code Verification Completed')
-	} 
-		catch(e) {
-		return await console.log('🚫invalid session code.🚫')
-		}
-	} else { return await console.log('🚫invalid session code . only works with aquabot md session codes🚫') }
+	
 	const conn = makeWASocket({
 		logger: P({ level: 'silent' }),
 		printQRInTerminal: true,
