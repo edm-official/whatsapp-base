@@ -25,8 +25,8 @@ fs.writeFileSync('./tmp/session.json', data.toString())
 console.log('🪢session Code Verification Completed')
 }
 const { state, saveState } = useSingleFileAuthState('./temp/session.json')
-const connectToWA = () => {
-	if (config.SESSION == '') return console.log('🚫please enter the session code')
+async function connectToWA()  {
+	if (config.SESSION == '') return await console.log('🚫please enter the session code')
 		if (config.SESSION.startsWith('AQUA=')){
 	await session(config.SESSION)
 	} else if (config.SESSION.startsWith('AQUA-MD=')) {
@@ -37,9 +37,9 @@ const connectToWA = () => {
         console.log('🪢session Code Verification Completed')
 	} 
 		catch(e) {
-		return console.log('🚫invalid session code.🚫')
+		return await console.log('🚫invalid session code.🚫')
 		}
-	} else { return console.log('🚫invalid session code . only works with aquabot md session codes🚫') }
+	} else { return await console.log('🚫invalid session code . only works with aquabot md session codes🚫') }
 	const conn = makeWASocket({
 		logger: P({ level: 'silent' }),
 		printQRInTerminal: true,
