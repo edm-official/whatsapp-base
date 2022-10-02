@@ -417,7 +417,7 @@ let buttons = [
 ]
 let buttonMessage = {
 image: { url: app.icon },
-caption: '*╭──[📂 PLAYSTORE DOWN 📂]─◎* \n*╭─────────────◎* \n*│🚀 App Name :* ' + app.name + '\n*│🧑🏻‍💻 Company :* ' + app.developer + '\n*│⭐ Ratings :* ' + app.ratings + '\n*│🔎 Apk Url :* https://play.google.com' + data.link + '/n*╰─────────────◎*',
+caption: '*╭──[📂 PLAYSTORE DOWN 📂]─◎* \n*╭─────────────◎* \n*│🚀 App Name :* ' + app.name + '\n*│🧑🏻‍💻 Company :* ' + app.developer + '\n*│⭐ Ratings :* ' + app.ratings + '\n*│🔎 Apk Url :* https://play.google.com' + data[0].link + ' /n*╰─────────────◎*',
 footer: config.FOOTER ,
 buttons: buttons,
 headerType: 4,
@@ -431,8 +431,8 @@ if(!q) return await conn.sendMessage(from , { text: 'need app link' }, { quoted:
     const apkdown = await conn.sendMessage(from , { text: pushname + ' ' + config.FILE_DOWN}, { quoted: mek } )
     await  conn.sendMessage(from, { delete: apkdown.key })
     const apkup = await conn.sendMessage(from , { text: pushname + ' ' + config.FILE_UP}, { quoted: mek } )
-let data2 = await axios.get('https://bobiz-api.herokuapp.com/api/apk?url=' + q)
-const data = data.data
+let data = await fetchjson('https://bobiz-api.herokuapp.com/api/apk?url=' + q)
+
 const apk = await conn.sendMessage(from, {document: { url: 'https://apk-dl2.herokuapp.com/api/apk-dl?url=' + q }, mimetype: 'application/vnd.android.package-archive', fileName: data.name + '.apk'}, {quoted: mek})   
 await  conn.sendMessage(from, { delete: apkup.key })   
 }
