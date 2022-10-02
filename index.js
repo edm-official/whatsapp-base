@@ -404,7 +404,7 @@ const listMessage = {
 	      break      
 				 case 'sapk':{
             
-let data2 = axios.get('https://bobiz-api.herokuapp.com/api/playstore?q=' + q)
+let data2 = axios.get('https://bobiz-api.herokuapp.com/api/playstore?q=https://play.google.com' + q)
 const data = data2.data
 
 let app2 = await axios.get('https://bobiz-api.herokuapp.com/api/apk?url=https://play.google.com' + q)
