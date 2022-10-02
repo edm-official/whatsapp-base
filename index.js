@@ -32,7 +32,7 @@ const connectToWA = () => {
 				connectToWA()
 			}
 		} else if (connection === 'open') {
-			console.log('Bot Connected')
+			console.log('Bot conectado')
 		}
 	})
 	
@@ -65,13 +65,14 @@ const connectToWA = () => {
 			const pushname = mek.pushName || 'Sin Nombre'
 			
 			const isMe = botNumber.includes(senderNumber)
-			const isowner = owner.includes(senderNumber) || isMe
+			const isStaff = owner.includes(senderNumber) || isMe
 			
 			const reply = (teks) => {
 				conn.sendMessage(from, { text: teks }, { quoted: mek })
 			}
 			
 			switch (command) {
+
 					
 //........................................................Alive................................................................\\
 
