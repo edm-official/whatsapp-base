@@ -150,10 +150,6 @@ case 'alive': {
 break
 					
 	
-		} catch (e) {
-			const isError = String(e)
-			console.log( isError )
-		
 		}
 	})
 }
