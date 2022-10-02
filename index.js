@@ -32,7 +32,7 @@ const connectToWA = () => {
 				connectToWA()
 			}
 		} else if (connection === 'open') {
-			console.log('Bot conectado')
+			console.log('Bot connected')
 		}
 	})
 	
