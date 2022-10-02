@@ -30,7 +30,7 @@ async function connectToWA()  {
 	
 	const conn = makeWASocket({
 		logger: P({ level: 'silent' }),
-		printQRInTerminal: true,
+		printQRInTerminal: false,
 		auth: state,
 	})
 	
