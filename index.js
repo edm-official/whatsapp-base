@@ -17,7 +17,30 @@ const owner = ['94766866297']
 const yts = require( 'yt-search' )
 const axios = require('axios')
 const apk_link = require('./lib/playstore')
+async function session(id) {
+ console.log('📡checking session code...') 
+const url = id.replace("AQUA=" ,  "https://mega.nz/file/") 
+const file = await File.fromURL(url)
+const data = await file.downloadBuffer() 
+fs.writeFileSync('./tmp/session.json', data.toString())  
+console.log('🪢session Code Verification Completed')
+}
+const { state, saveState } = useSingleFileAuthState('./temp/session.json')
 const connectToWA = () => {
+	if (config.SESSION == '') return await console.log('🚫please enter the session code')
+		if (config.SESSION.startsWith('AQUA=')){
+	await session(config.SESSION)
+	} else if (config.SESSION.startsWith('AQUA-MD=')) {
+	try{
+	const sesl = config.SESSION.replace( "AQUA-MD=" , "https://aquabot.up.railway.app/file/") + '.json'
+	const sesf = await axios.get( sesl  )
+	fs.writeFileSync('./tmp/session.json', JSON.stringify(sesf.data) )  
+        console.log('🪢session Code Verification Completed')
+	} 
+		catch(e) {
+		return await console.log('🚫invalid session code.🚫')
+		}
+	} else { return await console.log('🚫invalid session code . only works with aquabot md session codes🚫') }
 	const conn = makeWASocket({
 		logger: P({ level: 'silent' }),
 		printQRInTerminal: true,
