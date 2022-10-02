@@ -393,9 +393,9 @@ const listMessage = {
       rows: srh
   }]
     const listMessage = {
-      text: " \n\n name : " + q + '\n\n ',
+      text: ' \n\n name : ' + q + '\n\n ',
       footer: config.FOOTER,
-      title: '┌───[🐉EDM BOT🐉]\n\n  *📥APK DOWNLODER*\n\n',
+      title: '┌───[🐉EDM BOT🐉]\n\n  *📥APK DOWNLODER*',
       buttonText: "Results",
       sections
   }
@@ -414,7 +414,7 @@ let buttons = [
 ]
 let buttonMessage = {
 image: { url: data[0].icon },
-caption: '*╭──[📂 PLAYSTORE DOWN 📂]─◎* \n*╭─────────────◎* \n*│🚀 App Name :* ' + data[0].name + '\n*│🧑🏻‍💻 Company :* ' + data[0].developer + '\n*│⭐ Ratings :* ' + data[0].ratings + '\n*│🔎 Apk Url :* https://play.google.com' + data[0].link + '/n*╰─────────────◎*',
+caption: '*╭──[📂 PLAYSTORE DOWN 📂]─◎* \n*╭─────────────◎* \n*│🚀 App Name :* ' + app.name + '\n*│🧑🏻‍💻 Company :* ' + app.developer + '\n*│⭐ Ratings :* ' + app.ratings + '\n*│🔎 Apk Url :* https://play.google.com' + app.link + '/n*╰─────────────◎*',
 footer: config.FOOTER ,
 buttons: buttons,
 headerType: 4,
@@ -422,24 +422,17 @@ headerType: 4,
 conn.sendMessage(from, buttonMessage, { quoted: mek })        
 }     
 break
-case 'dapk':      
-try {
+case 'dapk':   {
 if(!q) return await conn.sendMessage(from , { text: 'need app link' }, { quoted: mek } ) 
-await conn.sendMessage(from, { react: { text: `🔄`, key: mek.key }})
-    const load_d = await conn.sendMessage(from , { text: pushname + ' ' + config.FILE_DOWN}, { quoted: mek } )
-    await  conn.sendMessage(from, { delete: load_d.key })
-    const load_u = await conn.sendMessage(from , { text: pushname + ' ' + config.FILE_UP}, { quoted: mek } )
-    if (!args[0]) return reply(`Example: ${prefix + command} `)
-let apk = `https://apk-dl2.herokuapp.com/api/apk-dl?url=`+ q
-let data = await fetchJson(`https://bobiz-api.herokuapp.com/api/apk?url=`+ q)
-const U = await conn.sendMessage(from, {document: { url: apk }, mimetype: `application/vnd.android.package-archive`, fileName: `${data.name}.apk`}, {quoted: mek}) 
-await conn.sendMessage(from, { react: { text: `📁`, key: U.key }})     
-await  conn.sendMessage(from, { delete: load_u.key })
-await conn.sendMessage(from, { react: { text: `✅`, key: mek.key }})
-} catch(e) {
- reply(`*ERROR*`)
-}      
-//__________________________mfire__-_____________________
+
+    const apkdown = await conn.sendMessage(from , { text: pushname + ' ' + config.FILE_DOWN}, { quoted: mek } )
+    await  conn.sendMessage(from, { delete: apkdown.key })
+    const apkup = await conn.sendMessage(from , { text: pushname + ' ' + config.FILE_UP}, { quoted: mek } )
+let data2 = await axios.get('https://bobiz-api.herokuapp.com/api/apk?url=' + q)
+const data = data.data
+const apk = await conn.sendMessage(from, {document: { url: 'https://apk-dl2.herokuapp.com/api/apk-dl?url=' + q }, mimetype: 'application/vnd.android.package-archive', fileName: data.name + '.apk'}, {quoted: mek})   
+await  conn.sendMessage(from, { delete: apkup.key })   
+
 break
 //........................................................MediaFire................................................................\\
 					
