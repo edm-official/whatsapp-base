@@ -65,7 +65,7 @@ const connectToWA = () => {
 			const pushname = mek.pushName || 'Sin Nombre'
 			
 			const isMe = botNumber.includes(senderNumber)
-			const isStaff = owner.includes(senderNumber) || isMe
+			const isOwner = owner.includes(senderNumber) || isMe
 			
 			const reply = (teks) => {
 				conn.sendMessage(from, { text: teks }, { quoted: mek })
