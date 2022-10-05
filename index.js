@@ -462,8 +462,7 @@ let data = await fetchJson('https://bobiz-api.herokuapp.com/api/apk?url=' + q)
 const apk = await conn.sendMessage(from, {document: { url: 'https://apk-dl2.herokuapp.com/api/apk-dl?url=' + q }, mimetype: 'application/vnd.android.package-archive', fileName: data.name + '.apk'}, {quoted: mek})   
 await  conn.sendMessage(from, { delete: apkup.key })   
 }
-					catch(e) {
-							await reply('Cant Download))
+					
 break
 //........................................................MediaFire................................................................\\
 					
