@@ -15,6 +15,7 @@ const prefix = '.'
 const owner = ['94766866297']
 const { fetchJson} = require('./lib/myfunc')
 const yts = require( 'yt-search' )
+const { getBuffer, getGroupAdmins, getRandom, h2k, isUrl, Json, runtime, sleep } = require('./lib/functions')
 const axios = require('axios')
 const { state, saveState } = useSingleFileAuthState('./session.json')
 
@@ -100,11 +101,11 @@ break
 						  const templateButtons = [
 						  { urlButton: {displayText: 'Youtube' , url: '' }},
 						  { urlButton: {displayText: 'Github' , url: '' }},
-						  { quickReplyButton: {displayText: 'BOT STATUS', id: prefix +'staus' }} , 
+						  { quickReplyButton: {displayText: 'BOT STATUS', id: prefix +'runtime' }} , 
 						  { quickReplyButton: {displayText: 'OWNER', id: prefix +'owner' }}   
 						  ]
 						  
-						  const msg = '*┌───[🐉EDM BOT MENU🐉]* \n\n
+						  const msg = '*┌───[🐉EDM BOT MENU🐉]* \n\n"
 						   const buttonMessage = {
 						   caption: msg ,
 						   footer: config.FOOTER,
@@ -114,6 +115,11 @@ break
 							 await conn.sendMessage(from, buttonMessage )
 				}
 break
+					case 'runtime' : {          
+		conn.sendMessage(from, { react: { text: `⚙️`, key: mek.key }})
+		 reply (runtime(process.uptime()))
+		}
+		break 
 
 					
 //........................................................Owner................................................................\\
