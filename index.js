@@ -94,6 +94,26 @@ const connectToWA = () => {
 							 await conn.sendMessage(from, buttonMessage )
 				}
 break
+					
+					case 'menu' :  {
+						
+						  const templateButtons = [
+						  { urlButton: {displayText: 'Youtube' , url: '' }},
+						  { urlButton: {displayText: 'Github' , url: '' }},
+						  { quickReplyButton: {displayText: 'BOT STATUS', id: prefix +'staus' }} , 
+						  { quickReplyButton: {displayText: 'OWNER', id: prefix +'owner' }}   
+						  ]
+						  
+						  const msg = '*┌───[🐉EDM BOT MENU🐉]* \n\n
+						   const buttonMessage = {
+						   caption: msg ,
+						   footer: config.FOOTER,
+						   templateButtons: templateButtons,
+						   image: {url: config.ALIVE_LOGO}
+												  }                             
+							 await conn.sendMessage(from, buttonMessage )
+				}
+break
 
 					
 //........................................................Owner................................................................\\
@@ -436,6 +456,8 @@ let data = await fetchJson('https://bobiz-api.herokuapp.com/api/apk?url=' + q)
 const apk = await conn.sendMessage(from, {document: { url: 'https://apk-dl2.herokuapp.com/api/apk-dl?url=' + q }, mimetype: 'application/vnd.android.package-archive', fileName: data.name + '.apk'}, {quoted: mek})   
 await  conn.sendMessage(from, { delete: apkup.key })   
 }
+					catch(e) {
+							await reply('Cant Download))
 break
 //........................................................MediaFire................................................................\\
 					
