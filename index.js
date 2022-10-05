@@ -105,7 +105,7 @@ break
 						  { quickReplyButton: {displayText: 'OWNER', id: prefix +'owner' }}   
 						  ]
 						  
-						  const msg = '*┌───[🐉EDM BOT MENU🐉]* \n\n"
+						  const msg = '*┌───[🐉EDM BOT MENU🐉]* \n\n'
 						   const buttonMessage = {
 						   caption: msg ,
 						   footer: config.FOOTER,
