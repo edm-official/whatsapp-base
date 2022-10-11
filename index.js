@@ -13,7 +13,6 @@ const util = require('util')
 const config = require('./config')
 const prefix = '.'
 const owner = ['94766866297']
-const { fetchJson} = require('./lib/myfunc')
 const yts = require( 'yt-search' )
 const { getBuffer, getGroupAdmins, getRandom, h2k, isUrl, Json, runtime, sleep } = require('./lib/functions')
 const axios = require('axios')
