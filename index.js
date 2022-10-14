@@ -97,6 +97,7 @@ const connectToWA = () => {
 		let users = mek.mentionedJid[0] ? mek.mentionedJid[0] : mek.quoted ? mek.quoted.sender : q.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
 		await conn.groupParticipantsUpdate(mek.chat, [users], 'demote').then((res) => mek.reply(jsonformat(res))).catch((err) => mek.reply(jsonformat(err)))
 	}
+					break
 					
 				case 'alive' :  {
 						
