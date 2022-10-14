@@ -70,7 +70,6 @@
 "scrape-primbon": "^1.1.0",
 "socket.io": "^4.5.1",
 "yt-search": "^2.10.2",
-"zimbot-v4": "4.0.1
  },
  "repository": {
   "type": "git",
