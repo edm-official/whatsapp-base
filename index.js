@@ -90,7 +90,7 @@ const connectToWA = () => {
 					case 'demote': {
                  
             
-		if (!mek.isGroup) return reply('try this in group')
+		if (!isGroup) return reply('try this in group')
                 if (!isBotAdmins) return reply('you are not a bot admin')
                 if (!isAdmins) return reply('you are not a admin')
  
