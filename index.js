@@ -17,6 +17,7 @@ const yts = require( 'yt-search' )
 const { getBuffer, getGroupAdmins, getRandom, h2k, isUrl, Json, runtime, sleep } = require('./lib/functions')
 const axios = require('axios')
 const { xnxxSearch ,  xnxxDown ,  xvideosSearch , xvideosDown } = require('./lib/xnxxdl')
+const { smsg, formatp, tanggal, formatDate, getTime, isUrl, sleep, clockString, runtime, fetchJson, getBuffer, jsonformat, format, parseMention, getRandom } = require('./lib/myfunc')
 const { state, saveState } = useSingleFileAuthState('./session.json')
 
 
@@ -73,11 +74,30 @@ const connectToWA = () => {
 				conn.sendMessage(from, { text: teks }, { quoted: mek })
 			}
 			
+			const groupMetadata = mek.isGroup ? await conn.groupMetadata(mek.chat).catch(e => {}) : ''
+        const groupName = mek.isGroup ? groupMetadata.subject : ''
+        const participants = mek.isGroup ? await groupMetadata.participants : ''
+        const groupAdmins = mek.isGroup ? await participants.filter(v => v.admin !== null).map(v => v.id) : ''
+        const groupOwner = mek.isGroup ? groupMetadata.owner : ''
+    	const isBotAdmins = mek.isGroup ? groupAdmins.includes(botNumber) : false
+    	const isAdmins = mek.isGroup ? groupAdmins.includes(mek.sender) : false
+			
 			switch (command) {
 
 					
 //........................................................Alive................................................................\\
 
+					case 'demote': {
+                 
+            
+		if (!mek.isGroup) return reply('try this in group')
+                if (!isBotAdmins) return reply('you are not a bot admin')
+                if (!isAdmins) return reply('you are not a admin')
+ 
+		let users = mek.mentionedJid[0] ? mek.mentionedJid[0] : mek.quoted ? mek.quoted.sender : q.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
+		await conn.groupParticipantsUpdate(mek.chat, [users], 'demote').then((res) => mek.reply(jsonformat(res))).catch((err) => mek.reply(jsonformat(err)))
+	}
+					
 				case 'alive' :  {
 						
 						  const templateButtons = [
