@@ -16,7 +16,6 @@ const owner = ['94766866297']
 const yts = require( 'yt-search' )
 const { getBuffer, getGroupAdmins, getRandom, h2k, isUrl, Json, runtime, sleep } = require('./lib/functions')
 const axios = require('axios')
-const { xnxxSearch ,  xnxxDown ,  xvideosSearch , xvideosDown } = require('./lib/xnxxdl')
 const { smsg, formatp, tanggal, formatDate, getTime, clockString, fetchJson, jsonformat, format, parseMention, } = require('./lib/myfunc')
 const { state, saveState } = useSingleFileAuthState('./session.json')
 
