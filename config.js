@@ -11,7 +11,7 @@ module.exports = {
 	ALIVE_LOGO: process.env.ALIVE_LOGO === undefined ? 'https://i.ibb.co/QJNkFcj/NISHI-1-removebg-preview.png' : process.env.ALIVE_LOGO,
         FOOTER: process.env.FOOTER === undefined ? 'Nishi-Bot' : process.env.FOOTER,
 	OWNER_NAME: process.env.OWNER_NAME === undefined ? 'Yoman Saubhagya' : process.env.OWNER_NAME,
-	OWNER_NUMBER: process.env.OWNER_NUMBER === undefined ? '94741764992' : process.env.OWNER_NUMBER,
+	OWNER_NUMBER: process.env.OWNER_NUMBER === undefined ? '94766866297' : process.env.OWNER_NUMBER,
 	SONG_DOWN: process.env.SONG_DOWN === undefined ? 'Downloading Your Song...' : process.env.SONG_DOWN,
 	SONG_UP: process.env.SONG_UP === undefined ? 'Uploading Your Song...' : process.env.SONG_UP,
 	VIDEO_DOWN: process.env.VIDEO_DOWN === undefined ? 'Downloading Your Video...' : process.env.VIDEO_DOWN,
